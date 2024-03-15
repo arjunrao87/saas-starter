@@ -33,8 +33,12 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event;
   console.log("**second")
   try {
-    if (!sig || !webhookSecret)
+    if (!sig || !webhookSecret){
+      console.log("**inside_second_a")
       return new Response('Webhook secret not found.', { status: 400 });
+    }
+    console.log("**webhook secret = " + webhookSecret)
+    console.log("**webhook sig = " + sig)
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
     console.log(`🔔  Webhook received: ${event.type}`);
   } catch (err: any) {
