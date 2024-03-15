@@ -25,27 +25,18 @@ const relevantEvents = new Set([
 import {NextApiRequest, NextApiResponse} from 'next';
 
 export async function POST(req: NextRequest) {
-  console.log("**first")
   const body = await req.text();
-  console.log(body)
   const sig = req.headers.get('stripe-signature') as string;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   let event: Stripe.Event;
-  console.log("**second")
   try {
     if (!sig || !webhookSecret){
-      console.log("**inside_second_a")
       return new Response('Webhook secret not found.', { status: 400 });
     }
-    console.log("**webhook secret = " + webhookSecret)
-    console.log("**webhook sig = " + sig)
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-    console.log(`🔔  Webhook received: ${event.type}`);
   } catch (err: any) {
-    console.log(`❌ Error message: ${err.message}`);
     return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
-  console.log("**major THIRD = " + event.type)
   if (relevantEvents.has(event.type)) {
     try {
       switch (event.type) {
