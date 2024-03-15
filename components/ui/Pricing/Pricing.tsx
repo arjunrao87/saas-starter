@@ -33,6 +33,7 @@ interface Props {
 type BillingInterval = 'lifetime' | 'year' | 'month';
 
 export default function Pricing({ user, products, subscription }: Props) {
+  console.log('products');
   console.log(products);
   const intervals = Array.from(
     new Set(
@@ -41,6 +42,8 @@ export default function Pricing({ user, products, subscription }: Props) {
       )
     )
   );
+  console.log('Intervals');
+  console.log(intervals);
   const router = useRouter();
   const [billingInterval, setBillingInterval] =
     useState<BillingInterval>('month');
