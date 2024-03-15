@@ -1,5 +1,7 @@
 import Stripe from 'stripe';
 import { stripe } from '@/utils/stripe/config';
+import { NextRequest } from "next/server";
+
 import {
   upsertProductRecord,
   upsertPriceRecord,
@@ -22,7 +24,7 @@ const relevantEvents = new Set([
 ]);
 import {NextApiRequest, NextApiResponse} from 'next';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   console.log("**first")
   const body = await req.text();
   console.log(body)
