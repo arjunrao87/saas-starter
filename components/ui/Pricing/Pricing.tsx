@@ -1,7 +1,6 @@
 'use client';
 
 import Button from '@/components/ui/Button';
-import LogoCloud from '@/components/ui/LogoCloud';
 import type { Tables } from '@/types_db';
 import { getStripe } from '@/utils/stripe/client';
 import { checkoutWithStripe } from '@/utils/stripe/server';
@@ -33,8 +32,6 @@ interface Props {
 type BillingInterval = 'lifetime' | 'year' | 'month';
 
 export default function Pricing({ user, products, subscription }: Props) {
-  console.log('products');
-  console.log(products);
   const intervals = Array.from(
     new Set(
       products.flatMap((product) =>
@@ -42,8 +39,6 @@ export default function Pricing({ user, products, subscription }: Props) {
       )
     )
   );
-  console.log('Intervals');
-  console.log(intervals);
   const router = useRouter();
   const [billingInterval, setBillingInterval] =
     useState<BillingInterval>('month');
@@ -87,7 +82,7 @@ export default function Pricing({ user, products, subscription }: Props) {
 
   if (!products.length) {
     return (
-      <section className="bg-black">
+      <section className="">
         <div className="max-w-6xl px-4 py-8 mx-auto sm:py-24 sm:px-6 lg:px-8">
           <div className="sm:flex sm:flex-col sm:align-center"></div>
           <p className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
@@ -103,12 +98,11 @@ export default function Pricing({ user, products, subscription }: Props) {
             .
           </p>
         </div>
-        <LogoCloud />
       </section>
     );
   } else {
     return (
-      <section className="bg-black">
+      <section className="">
         <div className="max-w-6xl px-4 py-8 mx-auto sm:py-24 sm:px-6 lg:px-8">
           <div className="sm:flex sm:flex-col sm:align-center">
             <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
@@ -200,7 +194,6 @@ export default function Pricing({ user, products, subscription }: Props) {
               );
             })}
           </div>
-          <LogoCloud />
         </div>
       </section>
     );

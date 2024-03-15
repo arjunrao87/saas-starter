@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Footer from '@/components/ui/Footer';
 import Navbar from '@/components/ui/Navbar';
 import { Toaster } from '@/components/ui/Toasts/toaster';
 import { PropsWithChildren, Suspense } from 'react';
@@ -7,7 +6,7 @@ import { getURL } from '@/utils/helpers';
 import 'styles/main.css';
 
 const meta = {
-  title: 'Next.js Subscription Starter',
+  title: 'SaaS starter',
   description: 'Brought to you by Vercel, Stripe, and Supabase.',
   cardImage: '/og.png',
   robots: 'follow, index',
@@ -49,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className="bg-black loading">
+      <body className=" loading">
         <Navbar />
         <main
           id="skip"
@@ -57,7 +56,6 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         >
           {children}
         </main>
-        <Footer />
         <Suspense>
           <Toaster />
         </Suspense>
